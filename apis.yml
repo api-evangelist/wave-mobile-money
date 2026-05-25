@@ -1,0 +1,235 @@
+aid: wave-mobile-money
+name: Wave Mobile Money
+description: >-
+  Wave is a Dakar, Senegal-headquartered mobile money company on a mission to
+  "make Africa the first cashless continent." Founded by Drew Durbin and
+  Lincoln Quirk (who previously built the Sendwave remittance service) and
+  publicly launched in Senegal in 2018, Wave provides a smartphone- and
+  agent-based wallet that lets users deposit and withdraw cash for free and
+  send money domestically for a flat 1% fee — roughly 70% cheaper than the
+  telco-led mobile money incumbents in the region. Wave operates today in
+  Senegal, Côte d'Ivoire, Uganda, Mali, Burkina Faso, and The Gambia, working
+  through a dense network of human agents alongside the Wave app and a
+  separate Wave Business portal for merchants and enterprises. In September
+  2021, Wave raised a USD 200M Series A led by Sequoia Heritage, Founders
+  Fund, Stripe, and Ribbit at a USD 1.7B valuation — the largest Series A
+  ever raised on the African continent at the time. For developers, Wave
+  exposes a tier-1 B2B platform via api.wave.com, documented at
+  docs.wave.com, with Checkout (hosted payment sessions), Payout (single and
+  batch disbursements, reversals, recipient verification), Balance &
+  Reconciliation (wallet balance, transactions, refunds), Aggregated
+  Merchants (sub-merchant management for aggregators and PSPs), and Webhooks
+  with HMAC-SHA256 signing for asynchronous event delivery. API keys are
+  scoped per-API, support IP allowlisting and optional request signing, and
+  the platform enforces idempotency on POST mutations.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Mobile Money
+  - Payments
+  - Fintech
+  - Financial Inclusion
+  - Africa
+  - West Africa
+  - Senegal
+  - Cote d'Ivoire
+  - Uganda
+  - Mali
+  - Burkina Faso
+  - Wallets
+  - Disbursements
+  - Checkout
+  - Payouts
+  - Money Transfer
+url: https://raw.githubusercontent.com/api-evangelist/wave-mobile-money/refs/heads/main/apis.yml
+created: '2026-05-24'
+modified: '2026-05-24'
+specificationVersion: '0.20'
+apis:
+  - aid: wave-mobile-money:wave-checkout-api
+    name: Wave Checkout API
+    description: >-
+      Hosted payment session API for accepting one-off payments from Wave
+      wallet users. Create a checkout session, redirect the customer to the
+      returned wave_launch_url, then receive a checkout.session.completed
+      webhook (or poll the session) once payment succeeds. Sessions support
+      success_url / error_url redirects, client_reference for correlation,
+      restrict_payer_mobile for phone-locked payments, and aggregated_merchant_id
+      for PSPs operating on behalf of sub-merchants. Includes session
+      retrieval, search by transaction_id or client_reference, refund, and
+      explicit expire endpoints.
+    humanURL: https://docs.wave.com/checkout
+    baseURL: https://api.wave.com
+    tags:
+      - Checkout
+      - Payments
+      - Hosted Payment Page
+    properties:
+      - type: Documentation
+        url: https://docs.wave.com/checkout
+      - type: Documentation
+        url: https://docs.wave.com/business
+  - aid: wave-mobile-money:wave-payout-api
+    name: Wave Payout API
+    description: >-
+      Programmatic disbursement API for sending money from a business wallet
+      to individual Wave wallets, identified by E.164 mobile number. Supports
+      single payouts, payout batches (submit many at once and poll batch
+      status), payout reversal, payout lookup by id or client reference, and
+      a verify_recipient pre-flight check. All POST requests require an
+      Idempotency-Key header for safe retries. Used for bulk payroll, gig
+      economy payouts, marketplace seller settlement, humanitarian cash
+      transfer programs, and refunds out-of-band of the original payment.
+    humanURL: https://docs.wave.com/payout
+    baseURL: https://api.wave.com
+    tags:
+      - Payouts
+      - Disbursements
+      - Bulk Payments
+    properties:
+      - type: Documentation
+        url: https://docs.wave.com/payout
+      - type: Documentation
+        url: https://docs.wave.com/business
+  - aid: wave-mobile-money:wave-balance-reconciliation-api
+    name: Wave Balance & Reconciliation API
+    description: >-
+      Read-side API for inspecting a business wallet's current balance and
+      enumerating its transactions for accounting and reconciliation. GET
+      /v1/balance returns the live wallet balance (optionally aggregated
+      across subaccounts); GET /v1/transactions returns a paginated,
+      time-ordered list of transactions for a given day; POST
+      /v1/transactions/:id/refund reverses a received payment including any
+      fees. Forward cursor pagination via first / after with a 1000-entry
+      page threshold.
+    humanURL: https://docs.wave.com/balance-api
+    baseURL: https://api.wave.com
+    tags:
+      - Balance
+      - Transactions
+      - Reconciliation
+      - Refunds
+    properties:
+      - type: Documentation
+        url: https://docs.wave.com/balance-api
+      - type: Documentation
+        url: https://docs.wave.com/business
+  - aid: wave-mobile-money:wave-aggregated-merchants-api
+    name: Wave Aggregated Merchants API
+    description: >-
+      Sub-merchant management API for aggregators, payment service providers,
+      and platforms that accept Wave payments on behalf of many downstream
+      businesses. Full CRUD over aggregated merchant records — list, create,
+      retrieve, update, delete — with the resulting aggregated_merchant_id
+      attached to Checkout and Payout calls so that funds and reporting flow
+      to the correct underlying merchant.
+    humanURL: https://docs.wave.com/aggregated-merchants
+    baseURL: https://api.wave.com
+    tags:
+      - Aggregators
+      - PSP
+      - Sub-Merchants
+      - Marketplace
+    properties:
+      - type: Documentation
+        url: https://docs.wave.com/aggregated-merchants
+      - type: Documentation
+        url: https://docs.wave.com/business
+  - aid: wave-mobile-money:wave-webhooks
+    name: Wave Webhooks
+    description: >-
+      Outbound event delivery channel for asynchronously notifying merchant
+      systems when state changes on the Wave platform. Events include
+      checkout.session.completed, checkout.session.payment_failed,
+      b2b.payment_received, b2b.payment_failed, merchant.payment_received,
+      and test.test_event for portal-triggered smoke tests. Every delivery
+      carries a Wave-Signature header containing a Unix timestamp and one or
+      more HMAC-SHA256 signatures over the raw body; receivers must validate
+      the signature and reject deliveries older than five minutes to prevent
+      replay. Event payloads use a Stripe-style envelope (id, type, data) and
+      the id field should be used to enforce at-least-once-delivery
+      idempotency.
+    humanURL: https://docs.wave.com/webhook
+    baseURL: https://api.wave.com
+    tags:
+      - Webhooks
+      - Events
+      - HMAC
+      - Asynchronous
+    properties:
+      - type: Documentation
+        url: https://docs.wave.com/webhook
+      - type: Documentation
+        url: https://docs.wave.com/business
+common:
+  - type: Website
+    url: https://www.wave.com
+  - type: Portal
+    url: https://www.wave.com/en/
+  - type: Portal
+    url: https://business.wave.com/
+    name: Wave for Business
+  - type: Documentation
+    url: https://docs.wave.com/business
+    name: Wave Business API Reference
+  - type: Documentation
+    url: https://docs.wave.com/checkout
+    name: Wave Checkout API
+  - type: Documentation
+    url: https://docs.wave.com/payout
+    name: Wave Payout API
+  - type: Documentation
+    url: https://docs.wave.com/balance-api
+    name: Wave Balance and Reconciliation API
+  - type: Documentation
+    url: https://docs.wave.com/aggregated-merchants
+    name: Wave Aggregated Merchants API
+  - type: Documentation
+    url: https://docs.wave.com/webhook
+    name: Wave Webhooks
+  - type: About
+    url: https://www.wave.com/en/about/
+  - type: Careers
+    url: https://www.wave.com/en/careers/
+  - type: Blog
+    url: https://www.wave.com/en/blog/
+  - type: Blog
+    url: https://wave.engineering/
+    name: Wave Engineering Blog
+  - type: TermsOfService
+    url: https://www.wave.com/en/terms_and_conditions/
+  - type: PrivacyPolicy
+    url: https://www.wave.com/en/privacy/
+  - type: Security
+    url: https://www.wave.com/en/security/responsible_disclosure
+    name: Responsible Disclosure
+  - type: Support
+    url: https://www.wave.com/en/complaints-policy/
+    name: Complaints Policy
+  - type: Product
+    url: https://www.wave.com/en/wdf/
+    name: Wave Digital Finance
+  - type: Pricing
+    url: https://www.wave.com/en/
+    name: 1% Send Fee, Free Deposit/Withdrawal
+  - type: Authentication
+    url: https://docs.wave.com/business
+    name: Bearer API Key with Optional HMAC-SHA256 Request Signing
+  - type: RateLimits
+    url: https://docs.wave.com/business
+    name: HTTP 429 Returned on Excess Requests
+  - type: CrunchBase
+    url: https://www.crunchbase.com/organization/wave-mobile-money
+  - type: YCombinator
+    url: https://www.ycombinator.com/companies/wave
+  - type: Wikipedia
+    url: https://en.wikipedia.org/wiki/Wave_Mobile_Money
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/wavemobilemoney/
+  - type: Twitter
+    url: https://x.com/WaveSenegal
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
