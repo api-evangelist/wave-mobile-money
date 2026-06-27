@@ -9,6 +9,10 @@
       "method": "feed"
     },
     {
+      "source": "https://wave.engineering/index.xml",
+      "error": "URLError"
+    },
+    {
       "source": "https://www.wave.com/en/careers/",
       "feed_url": "https://www.wave.com/en/careers/index.xml",
       "title": "",
@@ -24,5 +28,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }
