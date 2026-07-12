@@ -164,6 +164,10 @@ apis:
       - type: Documentation
         url: https://docs.wave.com/business
 common:
+  - type: VulnerabilityDisclosure
+    url: security/wave-mobile-money-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/wave-mobile-money-domain-security.yml
   - type: Website
     url: https://www.wave.com
   - type: Portal
