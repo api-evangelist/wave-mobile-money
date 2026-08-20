@@ -118,6 +118,11 @@ apis:
     humanURL: https://docs.wave.com/balance-api
     baseURL: https://api.wave.com
     tags:
+      - Balances
+      - Transaction
+      - Reconciliation
+      - Refunds
+    tags_raw:
       - Balance
       - Transactions
       - Reconciliation
@@ -165,6 +170,11 @@ apis:
     humanURL: https://docs.wave.com/webhook
     baseURL: https://api.wave.com
     tags:
+      - Webhook
+      - Event
+      - HMAC
+      - Asynchronous
+    tags_raw:
       - Webhooks
       - Events
       - HMAC
