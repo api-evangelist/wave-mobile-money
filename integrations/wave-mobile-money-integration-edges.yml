@@ -1,0 +1,58 @@
+edges:
+- partner_name: BCEAO (WAEMU) electronic-money institutions and bank partnerships
+  partner: null
+  partner_match: register-name
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.bceao.int/fr/content/etablissements-de-monnaie-electronique
+  category: WAEMU electronic-money licence / partnership
+  contract_reference:
+    register: BCEAO (WAEMU) electronic-money institutions and bank partnerships
+    spec_file: null
+    standard: null
+    role: licensed-participant
+    registrations:
+    - registered_name: WAVE MOBILE MONEY
+      licences:
+      - bank / operator e-money partnership
+      register_country: NE
+      matched_domain: null
+      matched_by: register-name
+      product: WAVE
+      partners:
+      - ECOBANK NIGER
+      register_name_note: register-name 'wavemobilemoney' = wave-mobile-money; no wikidata P856
+    signal_note: 'participation only: a regulator licence / registration; no API conformance is published by this
+      register'
+    detected_by: sweep-africa-payments.py
+    detected: '2026-10-20'
+    matched_by: register-name
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  detected_by: sweep-africa-payments.py
+  first_seen: '2026-10-20'
+generated: '2026-10-20'
+method: searched
+source:
+- https://www.cbn.gov.ng/PaymentsSystem/PSPs.html
+- https://www.cbn.gov.ng/PaymentsSystem/InternationalMoneyTransferOperators.html
+- https://www.centralbank.go.ke/wp-content/uploads/2026/09/Directory-of-Authorized-Payment-Service-Providers-August-10-2026.pdf
+- https://www.centralbank.go.ke/wp-content/uploads/2026/10/Directory-of-Licenced-Money-Remittance-Providers-as-at-September-30-2026.pdf
+- https://authorisation.pasa.org.za/so-and-tppp/documents/
+- https://authorisation.pasa.org.za/wp-content/uploads/2026/07/Public-list-SO-July-2026.pdf
+- https://authorisation.pasa.org.za/wp-content/uploads/2026/07/Public-list-TPPP-July-2026.pdf
+- https://www.bog.gov.gh/fintech-innovation/approved-institutions/
+- https://www.bceao.int/fr/content/etablissements-de-monnaie-electronique
+checked:
+- https://authorisation.pasa.org.za/so-and-tppp/documents/
+- https://authorisation.pasa.org.za/wp-content/uploads/2026/07/Public-list-SO-July-2026.pdf
+- https://authorisation.pasa.org.za/wp-content/uploads/2026/07/Public-list-TPPP-July-2026.pdf
+- https://www.bceao.int/fr/content/etablissements-de-monnaie-electronique
+- https://www.bog.gov.gh/fintech-innovation/approved-institutions/
+- https://www.cbn.gov.ng/PaymentsSystem/InternationalMoneyTransferOperators.html
+- https://www.cbn.gov.ng/PaymentsSystem/PSPs.html
+- https://www.centralbank.go.ke/wp-content/uploads/2026/09/Directory-of-Authorized-Payment-Service-Providers-August-10-2026.pdf
+- https://www.centralbank.go.ke/wp-content/uploads/2026/10/Directory-of-Licenced-Money-Remittance-Providers-as-at-September-30-2026.pdf
